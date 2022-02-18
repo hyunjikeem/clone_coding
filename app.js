@@ -1,1 +1,1 @@
-setting
+main
