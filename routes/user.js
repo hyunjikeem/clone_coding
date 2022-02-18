@@ -4,6 +4,7 @@ const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middlewares/auth-middleware');
 const bcrypt = require('bcrypt');
+const { exist } = require('joi');
 
 const router = express.Router();
 
@@ -21,7 +22,8 @@ router.post('/join/check', async (req, res) => {
         const { userEmail, userNickname } = await checkUsersSchmea.validateAsync(req.body);
 
         const existEmail = await User.find({ userEmail });
-        console.log(existEmail);
+        const existNickname = await User.find({ userNickname });
+        
         if (existEmail.length) {
             res.status(200).send({
                 ok: false,
@@ -30,15 +32,6 @@ router.post('/join/check', async (req, res) => {
             return;
         }
 
-        if (!existEmail.length) {
-            res.status(200).send({
-                ok: true,
-                message: '사용하실 수 있는 이메일입니다.😊',
-            });
-            return;
-        }
-
-        const existNickname = await User.find({ userNickname });
         if (existNickname.length) {
             res.status(200).send({
                 ok: false,
@@ -47,10 +40,10 @@ router.post('/join/check', async (req, res) => {
             return;
         }
 
-        if (!existNickname.length) {
+        if (!existNickname.length && !existEmail.length) {
             res.status(200).send({
                 ok: true,
-                message: '사용하실 수 있는 닉네임입니다.😊',
+                message: '사용하실 수 있는 이메일과 닉네임입니다.😊',
             });
         }
     } catch (err) {
@@ -76,7 +69,7 @@ const UsersSchema = Joi.object({
 router.post('/join', async (req, res) => {
     try {
         const { userEmail, userNickname, password, passwordConfirm } = await UsersSchema.validateAsync(req.body);
-
+        
         if (password !== passwordConfirm) {
             res.status(200).send({
                 ok: false,
