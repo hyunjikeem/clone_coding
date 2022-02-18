@@ -1,5 +1,5 @@
 {
-  "name": "js",
+  "name": "clone_coding",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/hyunjikeem/clone_coding.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -17,10 +18,9 @@
   },
   "homepage": "https://github.com/hyunjikeem/clone_coding#readme",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
-    "install": "^0.13.0",
+    "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.2"
   }

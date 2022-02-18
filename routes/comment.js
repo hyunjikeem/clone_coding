@@ -4,10 +4,11 @@ const Comment = require("../schemas/comment");
 const authMiddleware = require("../middlewares/auth-middleware");
 
 //댓글 작성
-router.post("/detail/comments", authMiddleware, async (req, res) => {
-  const commentContent = req.body;
-  const placeId = req.params;
-  const commentNickname = res.locals.users.userNickname;
+router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
+  const { commentContent } = req.body;
+  const { placeId } = req.params;
+  const userNickname = res.locals.user.userNickname;
+
   //const userId = res.locals.users.userId
 
   try {
@@ -22,7 +23,7 @@ router.post("/detail/comments", authMiddleware, async (req, res) => {
     Comment.create({
       //userId,
       placeId,
-      commentNickname,
+      userNickname,
       commentContent,
     });
 
@@ -64,3 +65,6 @@ router.put("/detail/comments/:commentId", authMiddleware, async (req, res) => {
         })
     }
 })
+
+
+module.exports = router;
