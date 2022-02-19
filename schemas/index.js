@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connect = () => {
     mongoose.connect('mongodb://test:test@localhost:27017/admin', {
-        dbName: 'airb2b'
+        dbName: 'airb2b',
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
         ignoreUndefined: true
