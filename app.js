@@ -7,8 +7,8 @@ connect();
 
 app.use(express.json());
 
-const userRouter = require('./routes/user');
-const commentRouter = require("./routes/comment"); 
+const userRouter = require('./routers/user');
+const commentRouter = require("./routers/comment"); 
 
 app.use('/api', express.urlencoded({ extended: false }), [ 
     userRouter, 
