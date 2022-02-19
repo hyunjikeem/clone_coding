@@ -7,53 +7,6 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
-//이메일, 닉네임 유효성 검사
-
-const checkUsersSchema = Joi.object({
-    userEmail: Joi.string().required(),
-    userNickname: Joi.string().required(),
-});
-
-//이메일, 닉네임 중복확인
-
-router.post('/join/check', async (req, res) => {
-    try {
-        const { userEmail, userNickname } = await checkUsersSchema.validateAsync(req.body);
-
-        const existEmail = await User.find({ userEmail });
-        const existNickname = await User.find({ userNickname });
-        
-        if (existEmail.length) {
-            res.status(200).send({
-                ok: false,
-                errorMessage: '이미 사용중인 이메일입니다.😖',
-            });
-            return;
-        }
-
-        if (existNickname.length) {
-            res.status(200).send({
-                ok: false,
-                errorMessage:'이미 사용중인 닉네임입니다.😖',
-            });
-            return;
-        }
-
-        if (!existNickname.length && !existEmail.length) {
-            res.status(200).send({
-                ok: true,
-                message: '사용하실 수 있는 이메일과 닉네임입니다.😊',
-            });
-        }
-    } catch (err) {
-        console.log(err);
-        res.status(200).send({
-            ok: false,
-            errorMessage: '요청한 데이터 형식이 올바르지 않습니다.😨',
-        });
-    };
-});
-
 //회원가입 유효성 검사
 
 const UsersSchema = Joi.object({
@@ -69,6 +22,25 @@ router.post('/join', async (req, res) => {
     try {
         const { userEmail, userNickname, password, passwordConfirm } = await UsersSchema.validateAsync(req.body);
         
+        const existEmail = await User.find({ userEmail });
+        const existNickname = await User.find({ userNickname});
+
+        if (existEmail.length) {
+            res.status(200).send({
+                ok: false,
+                errorMessage: '이미 사용중인 이메일입니다.😖',
+            });
+            return;
+        }
+
+        if (existNickname.length) {
+            res.status(200).send({
+                ok: false,
+                errorMessage: '이미 사용중인 닉네임입니다.😖',
+            });
+            return;
+        }
+
         if (password !== passwordConfirm) {
             res.status(200).send({
                 ok: false,
