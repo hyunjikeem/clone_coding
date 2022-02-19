@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const cors = required('cors');
+const cors = require('cors');
 const port = 5000;
 
 const connect = require('./schemas');
