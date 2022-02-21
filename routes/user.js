@@ -28,7 +28,6 @@ router.post('/join/check', async (req, res) => {
                 ok: false,
                 errorMessage: '이미 사용중인 이메일입니다.😖',
             });
-            return;
         }
 
         if (existNickname.length) {
@@ -66,15 +65,15 @@ const UsersSchema = Joi.object({
 //회원가입
 
 router.post('/join', async (req, res) => {
-    try {
-        const { userEmail, userNickname, password, passwordConfirm } = await UsersSchema.validateAsync(req.body);
-        
-        if (password !== passwordConfirm) {
-            res.status(200).send({
-                ok: false,
-                errorMessage: '비밀번호가 일치하지 않습니다😖',
-            })
-            return;
+        try {
+            const { userEmail, userNickname, password, passwordConfirm } = await UsersSchema.validateAsync(req.body);
+            
+            if (password !== passwordConfirm) {
+                res.status(200).send({
+                    ok: false,
+                    errorMessage: '비밀번호가 일치하지 않습니다😖',
+                })
+                return;
         }
 
         const encodedPassword = bcrypt.hashSync(password, 10);

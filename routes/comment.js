@@ -6,14 +6,12 @@ const authMiddleware = require("../middlewares/auth-middleware");
 
 
 
-//댓글 작성
+//댓글 등록
 router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
   const { commentContent } = req.body;
   const { placeId } = req.params;
   const userNickname = res.locals.user.userNickname;
-
-  //const userId = res.locals.users.userId
-
+  
   try {
     if (!commentContent) {
       res.status(200).send({
@@ -24,7 +22,6 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
     }
 
     Comment.create({
-      //userId,
       placeId,
       userNickname,
       commentContent,
