@@ -30,7 +30,6 @@ router.post('/join', async (req, res) => {
                 ok: false,
                 errorMessage: '이미 사용중인 이메일입니다.😖',
             });
-            return;
         }
 
         if (existNickname.length) {
@@ -40,6 +39,7 @@ router.post('/join', async (req, res) => {
             });
             return;
         }
+
 
         if (password !== passwordConfirm) {
             res.status(200).send({
