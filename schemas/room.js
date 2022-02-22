@@ -29,6 +29,4 @@ const RoomSchema = new Schema ({
     comment_Cnt: Number,
 });
 
-RoomSchema.plugin(AutoIncrement, {inc_field: 'placeId'});
-
 module.exports = mongoose.model('Place', RoomSchema);
