@@ -12,10 +12,12 @@ app.use(express.json());
 
 const userRouter = require('./routes/user');
 const commentRouter = require("./routes/comment"); 
+const RoomRouter = require("./routes/room"); 
 
 app.use('/api', express.urlencoded({ extended: false }), [ 
     userRouter, 
-    commentRouter, ]);
+    commentRouter,
+    RoomRouter ]);  
 
 app.listen(port, () => {
     console.log(`listening at http://localhost:${port}`);
