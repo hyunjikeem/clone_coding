@@ -8,7 +8,7 @@ const Comment = require("../schemas/comment");
 router.get("/location/:listId", async (req, res) => {
   try {
     const { listId } = req.params;
-    const locationPlaces = await Room.find(Number(listId));
+    const locationPlaces = await Room.find({listId:Number(listId)});
     res.json({
       locationPlaces,
     });
