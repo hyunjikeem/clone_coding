@@ -27,6 +27,11 @@ const RoomSchema = new Schema ({
     image4:String,
     image5:String,
     comment_Cnt: Number,
+    lat:Number,
+    lng:Number,
+    rating:String,
+    newprice:Number,
+    oldprice:Number,
 });
 
 module.exports = mongoose.model('Place', RoomSchema);
