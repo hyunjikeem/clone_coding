@@ -25,10 +25,10 @@ router.get("/detail/:placeId", async (req, res) => {
   try {
     const { placeId } = req.params;
     const place = await Room.findOne({placeId:Number(placeId)});
-    //const comment = await Comment.find(Number(placeId));
+    const comment = await Comment.find(Number(placeId));
     res.json({
       place,
-      //comment,
+      comment,
     });
 
   } catch (err) {
