@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../schemas/comment");
+const Room = require("../schemas/room")
 const authMiddleware = require("../middlewares/auth-middleware");
 
 
@@ -20,6 +21,9 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
       });
       return;
     }
+
+    const targetplace = Room.findOne({placeId:Number(placeId)})
+    targetplace.updateOne({comment_Cnt:1++})
 
     Comment.create({
       placeId,
