@@ -7,13 +7,11 @@ const CommentSchema = new mongoose.Schema({
     userNickname : {
         type: String,
         required: true,
-        unique: true,
       },
     
       commentContent : {
         type: String,
         required: true,
-        unique: true,
       },
 
       placeId : {
