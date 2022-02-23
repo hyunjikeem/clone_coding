@@ -6,7 +6,9 @@ const connect = () => {
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
         ignoreUndefined: true
-    }).catch(err => console.log(err));
+        
+    })
+    .catch(err => console.log(err));
 };
 
 mongoose.connection.on('error', err => {
