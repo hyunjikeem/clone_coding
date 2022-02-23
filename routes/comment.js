@@ -23,7 +23,7 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
     }
 
     const targetplace = Room.findOne({placeId:Number(placeId)})
-    targetplace.updateOne({comment_Cnt:1++})
+    //targetplace.updateOne({comment_Cnt:1++})
 
     Comment.create({
       placeId,
