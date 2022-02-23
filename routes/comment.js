@@ -12,6 +12,7 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
   const { commentContent } = req.body;
   const { placeId } = req.params;
   const userNickname = res.locals.user.userNickname;
+  console.log((req.params))
   
   try {
     if (!commentContent) {

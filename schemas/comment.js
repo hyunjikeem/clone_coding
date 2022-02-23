@@ -14,6 +14,10 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+      },
+
+      placeId : {
+        type: Number,
       }
 });
 
