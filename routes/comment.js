@@ -32,7 +32,7 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
     });
     const targetplace = await Room.findOne({placeId:Number(placeId)}, { _id: false })
 
-     comment_Cnt = targetplace.Comment_Cnt +1;
+     comment_Cnt = targetplace.comment_Cnt +1;
      await Room.updateOne(
        {placeId: placeId},
        {$set: { comment_Cnt : comment_Cnt}}
