@@ -32,11 +32,11 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
       commentContent,
     });
 
-    comment_Cnt = targetplace.Comment_Cnt +1;
-    await Room.updateOne(
-      {placeId: placeId},
-      {$set: { comment_Cnt : comment_Cnt}}
-    )
+    // comment_Cnt = targetplace.Comment_Cnt +1;
+    // await Room.updateOne(
+    //   {placeId: placeId},
+    //   {$set: { comment_Cnt : comment_Cnt}}
+    // )
 
     res.json({ok: true, Message: "후기가 등록되었습니다 😃", commentId:result.commentId})
   } catch (err) {
