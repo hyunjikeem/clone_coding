@@ -107,7 +107,7 @@ router.post('/login', async (req, res) => {
         res.send({
             token,
             userEmail,
-            userNickname,
+            userNickname:user.userNickname,
             ok: true,
         });
     } catch (err) {
