@@ -22,19 +22,22 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
       return;
     }
 
-    const targetplace = Room.findOne({placeId:Number(placeId)})
-    //targetplace.updateOne({comment_Cnt:1++})
+    const targetplace = await Room.findOne({placeId:Number(placeId)}, { _id: false })
 
-    Comment.create({
+
+   const result = await Comment.create({
       placeId,
       userNickname,
       commentContent,
     });
 
-    res.status(201).send({
-      ok: true,
-      Message: "후기가 등록되었습니다 😃",
-    });
+    comment_Cnt = targetplace.Comment_Cnt +1;
+    await Room.updateOne(
+      {placeId: placeId},
+      {$set: { comment_Cnt : comment_Cnt}}
+    )
+
+    res.json({ok: true, Message: "후기가 등록되었습니다 😃", commentId:result.commentId})
   } catch (err) {
     console.log(err);
     res.status(200).send({
