@@ -24,7 +24,8 @@ router.get("/location/:listId", async (req, res) => {
 router.get("/detail/:placeId", async (req, res) => {
   try {
     const { placeId } = req.params;
-    const place = await Room.findOne(Number(placeId));
+    const place = await Room.findOne({placeId:Number(placeId)});
+    console.log(place)
     //const comment = await Comment.find(Number(placeId));
     res.json({
       place,
