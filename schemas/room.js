@@ -30,8 +30,8 @@ const RoomSchema = new Schema ({
     lat:Number,
     lng:Number,
     rating:String,
-    newprice:Number,
-    oldprice:Number,
+    newprice:String,
+    oldprice:String,
 });
 
 module.exports = mongoose.model('Place', RoomSchema);
