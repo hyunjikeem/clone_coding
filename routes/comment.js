@@ -23,8 +23,6 @@ router.post("/detail/comments/:placeId", authMiddleware, async (req, res) => {
       return;
     }
 
-    
-
    const result = await Comment.create({
       placeId,
       userNickname,
@@ -84,6 +82,15 @@ router.delete("/detail/comments/:commentId", authMiddleware, async (req, res) =>
     await Comment.deleteOne(
       { commentId: Number(commentId) },
     );
+
+    const targetComment = await Comment.findOne({commentId:Number(commentId)}, {_id: false})
+    
+    comment_Cnt = targetComment.comment_Cnt -1;
+    await Comment.updateOne(
+      {commentId: commentId},
+      {$set: { comment_Cnt : comment_Cnt}}
+    )
+
     res.json({
       ok: true,
       message: "댓글 삭제가 완료되었습니다. 😃",
