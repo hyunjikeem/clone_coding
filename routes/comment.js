@@ -83,11 +83,12 @@ router.delete("/detail/comments/:commentId", authMiddleware, async (req, res) =>
       { commentId: Number(commentId) },
     );
 
-    const targetComment = await Comment.findOne({commentId:Number(commentId)}, {_id: false})
-    
-    comment_Cnt = targetComment.comment_Cnt -1;
-    await Comment.updateOne(
-      {commentId: commentId},
+    const placeId = existComment.placeId
+    const targetRoom = await Room.findOne({placeId:Number(placeId)}, {_id: false})
+
+    comment_Cnt = targetRoom.comment_Cnt -1;
+    await Room.updateOne(
+      {placeId: placeId},
       {$set: { comment_Cnt : comment_Cnt}}
     )
 
